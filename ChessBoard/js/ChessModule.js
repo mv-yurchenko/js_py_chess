@@ -28,7 +28,7 @@ let onDrop = function(source, target) {
     updateStatus();
 };
 
-// update the board position after the piece snap 
+// update the board position after the piece snap
 // for castling, en passant, pawn promotion
 let onSnapEnd = function() {
     board.position(game.fen());
@@ -63,17 +63,74 @@ let updateStatus = function() {
     }
 
     statusEl.html(status);
-    fenEl.html(game.fen());
     pgnEl.html(game.pgn());
+
 };
+
+
+
+
+// Highlight possible moves
+/// --------------------------------------------------
+let removeGreySquares= function () {
+    $('#board .square-55d63').css('background', '');
+};
+
+let greySquare = function (square) {
+    let squareEl = $('#board .square-' + square);
+
+    let background = '#FF4500';
+
+    if (squareEl.hasClass('nack-3c85d') === true){
+        background = "#696969";
+    }
+
+    squareEl.css('background', background);
+};
+
+let onMouseoverSquare = function (square, piece) {
+    let moves = game.moves({
+        square : square,
+        verbose : true
+    });
+
+    // If no moves available for this square
+    if (moves.length === 0) return;
+
+    // Highlight square
+    greySquare(square);
+
+    // Highlight possible squares
+    for (let i = 0; i < moves.length; i++){
+        greySquare(moves[i].to);
+    }
+};
+
+let onMouseoutSquare = function () {
+    removeGreySquares()
+};
+/// --------------------------------------------------
+
+// Output to console figure coordinates
+function clickGetPositionBtn(){
+    console.log(board.position())
+}
+
+$('#getPositionBtn').on('click', clickGetPositionBtn)
 
 let cfg = {
     draggable: true,
-    position: 'start',
+    dropOffBoard : 'trash',
+    sparePieces : true,
     onDragStart: onDragStart,
     onDrop: onDrop,
+    onMouseoutSquare : onMouseoutSquare,
+    onMouseoverSquare : onMouseoverSquare,
     onSnapEnd: onSnapEnd
 };
 board = ChessBoard('board', cfg);
+
+// Start Button
+$("#startGameBtn").on('click', board.start);
 
 updateStatus();

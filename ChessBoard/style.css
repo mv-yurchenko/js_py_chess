@@ -1,68 +1,43 @@
-* {
-    margin: 0px;
-    padding: 0px;
-}
-body {
-    font-size: 120%;
-    background: #F8F8FF;
+*
+{
+    text-align: center !important;
+    margin: auto !important;
 }
 
-.header {
-    width: 30%;
-    margin: 50px auto 0px;
-    color: white;
-    background: #5F9EA0;
-    text-align: center;
-    border: 1px solid #B0C4DE;
-    border-bottom: none;
-    border-radius: 10px 10px 0px 0px;
-    padding: 20px;
+#board{
+    height: 640px;
+    width: 480px;
 }
-form, .content {
-    width: 30%;
-    margin: 0px auto;
-    padding: 20px;
-    border: 1px solid #B0C4DE;
-    background: white;
-    border-radius: 0px 0px 10px 10px;
+
+#status{
+    font-size: 20pt;
+    color: black;
 }
-.input-group {
-    margin: 10px 0px 10px 0px;
+
+body{
+    background: #f6f6f6 ;
 }
-.input-group label {
-    display: block;
-    text-align: left;
-    margin: 3px;
+
+#getPositionBtn{
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 15px;
 }
-.input-group input {
-    height: 30px;
-    width: 93%;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid gray;
+
+#startGameBtn{
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 15px;
 }
-.btn {
-    padding: 10px;
-    font-size: 15px;
-    color: white;
-    background: #5F9EA0;
-    border: none;
-    border-radius: 5px;
-}
-.error {
-    width: 92%;
-    margin: 0px auto;
-    padding: 10px;
-    border: 1px solid #a94442;
-    color: #a94442;
-    background: #f2dede;
-    border-radius: 5px;
-    text-align: left;
-}
-.success {
-    color: #3c763d;
-    background: #dff0d8;
-    border: 1px solid #3c763d;
-    margin-bottom: 20px;
+
+#pgn{
+    font-size: 20pt;
 }
