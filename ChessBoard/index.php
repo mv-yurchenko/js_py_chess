@@ -12,8 +12,6 @@
 
 <body>
     <div id="board" style="width: 400px"></div>
-    <input type="button" id="statBtn" value="Start" />
-    <input type="button" id="clearBtn" value="Clear" />
     <p>Status: <span id="status"></span></p>
     <p>FEN: <span id="fen"></span></p>
     <p>PGN: <span id="pgn"></span></p>
@@ -22,3 +20,4 @@
 <script src="js/ChessModule.js"></script>
 
 </html>
+

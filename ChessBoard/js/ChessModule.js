@@ -1,79 +1,79 @@
 let board,
     game = new Chess(),
-    statusEL = $("#status"),
-    fenEL = $("#fen"),
-    pgnEL = $("#pgn");
+    statusEl = $('#status'),
+    fenEl = $('#fen'),
+    pgnEl = $('#pgn');
 
-let onDragStart = function (source, piece, position, orientation) {
+// do not pick up pieces if the game is over
+// only pick up pieces for the side to move
+let onDragStart = function(source, piece, position, orientation) {
     if (game.game_over() === true ||
-        // If its white turn and figure belongs to black
-        (game.turn() === 'w' && piece.search('/^b/') !== -1) ||
-        // If its black turn and figure belongs to white
-        (game.turn() === 'b' && piece.search('/^w/') !== -1)) {
+        (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
         return false;
     }
 };
 
-let onDrop = function (source, target) {
-    // Check if move is legal
+let onDrop = function(source, target) {
+    // see if the move is legal
     let move = game.move({
-        from : source, to: target, promotion: 'q'
+        from: source,
+        to: target,
+        promotion: 'q' // NOTE: always promote to a queen for example simplicity
     });
 
-    // If move is Illegal
-    if (move) return 'snapback';
+    // illegal move
+    if (move === null) return 'snapback';
 
     updateStatus();
 };
 
-let onSnapEnd = function () {
+// update the board position after the piece snap 
+// for castling, en passant, pawn promotion
+let onSnapEnd = function() {
     board.position(game.fen());
 };
 
-let updateStatus = function () {
+let updateStatus = function() {
     let status = '';
 
-    let moveColor = "White";
-
+    let moveColor = 'White';
     if (game.turn() === 'b') {
-        moveColor = "Black";
+        moveColor = 'Black';
     }
 
     // checkmate?
-  if (game.in_checkmate() === true) {
-    status = 'Game over, ' + moveColor + ' is in checkmate.';
-  }
-
-  // draw?
-  else if (game.in_draw() === true) {
-    status = 'Game over, drawn position';
-  }
-
-  // game still on
-  else {
-    status = moveColor + ' to move';
-
-    // check?
-    if (game.in_check() === true) {
-      status += ', ' + moveColor + ' is in check';
+    if (game.in_checkmate() === true) {
+        status = 'Game over, ' + moveColor + ' is in checkmate.';
     }
-  }
 
-  statusEL.html(status);
-  fenEL.html(game.fen());
-  pgnEL.html(game.pgn());
+    // draw?
+    else if (game.in_draw() === true) {
+        status = 'Game over, drawn position';
+    }
+
+    // game still on
+    else {
+        status = moveColor + ' to move';
+
+        // check?
+        if (game.in_check() === true) {
+            status += ', ' + moveColor + ' is in check';
+        }
+    }
+
+    statusEl.html(status);
+    fenEl.html(game.fen());
+    pgnEl.html(game.pgn());
 };
-
-
 
 let cfg = {
-    draggable : true,
-    position : 'start',
-    onDragStart : onDragStart,
-    onDrop : onDrop,
-    onSnapEnd : onSnapEnd
+    draggable: true,
+    position: 'start',
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onSnapEnd: onSnapEnd
 };
-
 board = ChessBoard('board', cfg);
 
 updateStatus();
