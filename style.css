@@ -1,3 +1,13 @@
+.info {
+    width: 400px;
+    margin: auto;
+}
+
+.move-history {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
 *
 {
     text-align: center !important;
@@ -5,8 +15,8 @@
 }
 
 #board{
-    height: 640px;
-    width: 480px;
+    height: 400px;
+    width: 300px;
 }
 
 #status{
