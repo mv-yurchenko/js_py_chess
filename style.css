@@ -1,0 +1,53 @@
+.info {
+    width: 400px;
+    margin: auto;
+}
+
+.move-history {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+*
+{
+    text-align: center !important;
+    margin: auto !important;
+}
+
+#board{
+    height: 400px;
+    width: 300px;
+}
+
+#status{
+    font-size: 20pt;
+    color: black;
+}
+
+body{
+    background: #f6f6f6 ;
+}
+
+#getPositionBtn{
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 15px;
+}
+
+#startGameBtn{
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 15px;
+}
+
+#pgn{
+    font-size: 20pt;
+}
